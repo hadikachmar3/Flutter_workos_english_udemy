@@ -26,6 +26,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
   String? authorName;
   String? authorPosition;
   String? userImageUrl;
+  String? _loggedInUserImageUrl;
   String? taskCategory;
   String? taskDescription;
   String? tasktitle;
@@ -35,6 +36,8 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
   String? postedDate;
   String? deadlineDate;
   bool isDeadlineAvailable = false;
+  //Added new
+  String? _loggedUserName;
   @override
   void initState() {
     super.initState();
@@ -42,6 +45,20 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
   }
 
   void getTaskData() async {
+    //New to fix the bug
+    User? user = _auth.currentUser;
+    final _uid = user!.uid;
+    final DocumentSnapshot getCommenterInfoDoc =
+        await FirebaseFirestore.instance.collection('users').doc(_uid).get();
+    if (getCommenterInfoDoc == null) {
+      return;
+    } else {
+      setState(() {
+        _loggedUserName = getCommenterInfoDoc.get('name');
+        _loggedInUserImageUrl = getCommenterInfoDoc.get('userImage');
+      });
+    }
+    //
     final DocumentSnapshot userDoc = await FirebaseFirestore.instance
         .collection('users')
         .doc(widget.uploadedBy)
@@ -375,6 +392,12 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                                                       'Comment cant be less than 7 characteres',
                                                   ctx: context);
                                             } else {
+                                              User? user = _auth.currentUser;
+                                              final _uid = user!.uid;
+                                              // print('Uid is $_uid');
+                                              // print(
+                                              //     'uploaded by id is ${widget.uploadedBy}');
+
                                               final _generatedId = Uuid().v4();
                                               await FirebaseFirestore.instance
                                                   .collection('tasks')
@@ -383,11 +406,16 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                                                 'taskComments':
                                                     FieldValue.arrayUnion([
                                                   {
-                                                    'userId': widget.uploadedBy,
+                                                    //There was a bug here we should upload the current logged in user
+                                                    //instead of the uploader ID
+                                                    'userId': _uid,
                                                     'commentId': _generatedId,
-                                                    'name': authorName,
+                                                    //and for the name it was the author name
+                                                    //it should be the current logged in username
+                                                    'name': _loggedUserName,
+                                                    //Also we need to change the image
                                                     'userImageUrl':
-                                                        userImageUrl,
+                                                        _loggedInUserImageUrl,
                                                     'commentBody':
                                                         _commentController.text,
                                                     'time': Timestamp.now(),

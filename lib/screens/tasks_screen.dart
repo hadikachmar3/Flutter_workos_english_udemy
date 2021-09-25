@@ -48,11 +48,16 @@ class _TasksScreenState extends State<TasksScreen> {
           ],
         ),
         body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection('tasks')
-              .where('taskCategory', isEqualTo: taskCategoryFilter)
-              .orderBy('createdAt', descending: false)
-              .snapshots(),
+          //there was a null error just add those lines
+          stream: taskCategoryFilter == null
+              ? FirebaseFirestore.instance
+                  .collection('tasks')
+                  .orderBy('createdAt', descending: true)
+                  .snapshots()
+              : FirebaseFirestore.instance
+                  .collection('tasks')
+                  .where('taskCategory', isEqualTo: taskCategoryFilter)
+                  .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
