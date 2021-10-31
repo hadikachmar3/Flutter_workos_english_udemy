@@ -5,8 +5,8 @@
 [![Youtube Channel](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png)](https://www.youtube.com/channel/UCTGDYkqUtgCelc6G09LUm6w "Youtube Channel - Click to View!")
 
 ## Get the Udemy course now 👇
-<!-- 
-[![Udemy course](https://www.pipelinersales.com/wp-content/uploads/2019/06/large-udemy.jpg)](https://www.udemy.com/course/flutter-with-firebase-build-an-e-commerce-app-from-scratch/#reviews "Udemy course - Click to View!") -->
+ 
+<a><img src="https://img-c.udemycdn.com/course/240x135/4152492_2af7.jpg" height="24" width="48">](https://www.udemy.com/course/flutter-with-firebase-build-an-e-commerce-app-from-scratch/learn/ "Udemy course - Click to View!")</a> 
 
 
 ## download it from google playstore 👇
