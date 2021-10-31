@@ -6,7 +6,7 @@
 
 ## Get the Udemy course now 👇
  
-<a><img src="https://img-c.udemycdn.com/course/240x135/4152492_2af7.jpg" height="24" width="48">](https://www.udemy.com/course/flutter-with-firebase-build-an-e-commerce-app-from-scratch/learn/ "Udemy course - Click to View!")</a> 
+<a href="https://www.udemy.com/course/flutter-with-firebase-build-an-e-commerce-app-from-scratch/learn/ "><img src="https://img-c.udemycdn.com/course/240x135/4152492_2af7.jpg" height="280" width="400"></a> 
 
 
 ## download it from google playstore 👇
